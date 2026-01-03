@@ -1,0 +1,14 @@
+[project]
+name = "countries-mcp"
+version = "0.1.0"
+description = "MCP server for fetching country information from REST Countries API"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=2.0.0",
+    "httpx>=0.25.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
