@@ -6,7 +6,7 @@ A Model Context Protocol (MCP) server built with FastMCP that provides country i
 
 ## Features
 
-- **Get Country Information**: Retrieve detailed information about any country by name
+- **Get Country Information Tool**: Retrieve detailed information about any country by name
   - Country name (common and official)
   - Capital city
   - Region and subregion
@@ -15,6 +15,11 @@ A Model Context Protocol (MCP) server built with FastMCP that provides country i
   - Languages
   - Currencies
   - Flag image URL
+
+- **Country Codes Resource**: Access a static JSON file with common country codes and names
+  - 30+ countries with ISO codes
+  - Quick reference for country codes
+  - Available as a read-only resource
 
 ## Prerequisites
 
@@ -106,23 +111,64 @@ If the server is configured correctly, Cursor will use the tool to fetch country
 
 ## Usage
 
-Once configured, you can use the country information tool in Cursor's chat interface:
+Once configured, you can use both tools and resources in Cursor's chat interface:
 
-### Example Prompts
+### Using Tools - Get Country Information
 
+The `get_country_info` tool fetches detailed information about any country by name. Here are example prompts:
+
+**Basic Information Requests:**
 - "Get information about Ukraine"
 - "What are the details for the United States?"
 - "Show me country information for Japan"
 - "Get country info for Brazil"
 - "What's the capital of France?"
 
+**Specific Information Requests:**
+- "Tell me about Germany's population and area"
+- "What languages are spoken in Canada?"
+- "Show me the currency used in Australia"
+- "Get the flag URL for Italy"
+- "What's the region and subregion of Mexico?"
+
+**Multiple Countries:**
+- "Get information about both France and Spain"
+- "Compare Ukraine and Poland"
+- "Show me details for Japan and South Korea"
+
 The AI will automatically detect your request and use the `get_country_info` tool to fetch the information.
+
+### Using Resources - Country Codes Reference
+
+The `countries://country-codes` resource provides a static JSON file with common country codes and names. Here are example prompts:
+
+**Accessing the Resource:**
+- "Show me the country codes resource"
+- "What countries are available in the country codes file?"
+- "Read the country codes resource"
+- "Get the list of country codes"
+- "Show me the country codes JSON"
+
+**Using the Resource in Context:**
+- "Use the country codes resource to find the code for United States"
+- "Check the country codes file and tell me what code Ukraine has"
+- "From the country codes resource, list all available countries"
+- "What country codes are in the resource file?"
+
+**Combining Tool and Resource:**
+- "First show me the country codes, then get detailed info for Ukraine"
+- "List the country codes and then get information about one of them"
+- "Check the country codes resource and get details for a country from that list"
+
+The resource returns a JSON structure with country codes and names that can be used as a reference when working with country data.
 
 ## Project Structure
 
 ```
 countries-mcp/
 ├── server.py              # Main MCP server implementation
+├── data/                  # Static data files
+│   └── country_codes.json # Country codes resource data
 ├── requirements.txt       # Python dependencies
 ├── pyproject.toml        # Project configuration
 ├── .venv/                # Virtual environment (created during setup)
