@@ -1,5 +1,7 @@
 # Countries MCP Server
 
+![Countries MCP](images/Coutries_MCP.png)
+
 A Model Context Protocol (MCP) server built with FastMCP that provides country information from the REST Countries API. This server exposes tools that can be used within Cursor IDE and other MCP-compatible applications.
 
 ## Features
