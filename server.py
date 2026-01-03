@@ -1,10 +1,33 @@
 """MCP server for fetching country information from REST Countries API."""
+import json
 import httpx
+from pathlib import Path
 from fastmcp import FastMCP
 
 
 # Initialize the FastMCP server
 mcp = FastMCP("countries-mcp")
+
+
+@mcp.resource("countries://country-codes")
+def get_country_codes() -> str:
+    """Get a list of country codes and names.
+    
+    This resource provides a JSON file with common country codes
+    that can be used as a reference when working with country data.
+    """
+    try:
+        data_file = Path(__file__).parent / "data" / "country_codes.json"
+        
+        if not data_file.exists():
+            return json.dumps({"error": "Country codes file not found"}, indent=2)
+        
+        with open(data_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        return json.dumps(data, indent=2)
+    except Exception as e:
+        return json.dumps({"error": f"Failed to load country codes: {str(e)}"}, indent=2)
 
 
 @mcp.tool()
