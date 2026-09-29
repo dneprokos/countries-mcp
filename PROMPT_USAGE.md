@@ -172,6 +172,21 @@ Which shawarma is better, with potatoes or without?
 
 **What Happens:** The AI calls the tool and you get the answer "з картоплею краща!" plus the kebab image from `images/kebab.png`.
 
+### 4. Country Borders Tool (`get_country_borders`)
+
+**Purpose:** List the countries that share a land border with the given country, each with capital, population and flag emoji.
+
+**Parameters:**
+- `country_name` (required): Name of the country (e.g. `Ukraine`, `Canada`)
+
+**How to Use in Cursor:**
+
+```
+Which countries border Poland?
+```
+
+**What Happens:** The tool looks up the country's alpha-3 code, then calls `/borders/{code}`. Island nations return "has no land borders". Useful alongside `compare_countries_prompt` or `country_research_prompt` for geography context.
+
 ---
 
 ## Differences: Prompts vs Tools

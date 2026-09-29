@@ -26,7 +26,7 @@ There are no tests, no lint step, and no build step. Verification is manual: sta
 
 `server.py` registers four kinds of MCP objects, all via FastMCP decorators:
 
-- `@mcp.tool()` — `get_country_info(country_name)`, `shawarma_with_or_without_potatoes()` (joke tool, Ukrainian text, returns `images/kebab.png` inlined as a base64 data URI)
+- `@mcp.tool()` — `get_country_info(country_name)`, `get_country_borders(country_name)` (name → alpha-3 via `/name`, then `/borders/{code}` with its own `BORDER_FIELDS`), `shawarma_with_or_without_potatoes()` (joke tool, Ukrainian text, returns `images/kebab.png` inlined as a base64 data URI)
 - `@mcp.resource("countries://country-codes")` — serves `data/country_codes.json`
 - `@mcp.prompt()` — `compare_countries_prompt`, `country_research_prompt`
 

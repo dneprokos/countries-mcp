@@ -2,13 +2,14 @@
 
 ![Countries MCP](images/Coutries_MCP.png)
 
-A Model Context Protocol (MCP) server built with FastMCP that serves country information from the REST Countries API v5. It exposes two tools, one resource, and two prompt templates over stdio to any MCP-compatible client — Cursor, Claude Code, and others.
+A Model Context Protocol (MCP) server built with FastMCP that serves country information from the REST Countries API v5. It exposes three tools, one resource, and two prompt templates over stdio to any MCP-compatible client — Cursor, Claude Code, and others.
 
 ## MCP surface
 
 | Type | Name | What it does |
 |------|------|--------------|
 | Tool | `get_country_info(country_name)` | Fetches one country from REST Countries v5 and formats it |
+| Tool | `get_country_borders(country_name)` | Lists countries sharing a land border, with capital, population and flag |
 | Tool | `shawarma_with_or_without_potatoes()` | Joke tool (Ukrainian): answers "with potatoes", returns `images/kebab.png` inline |
 | Resource | `countries://country-codes` | Serves `data/country_codes.json` |
 | Prompt | `compare_countries_prompt(country1, country2)` | Structured two-country comparison |
@@ -28,6 +29,7 @@ See [PROMPT_USAGE.md](PROMPT_USAGE.md) for prompt-by-prompt usage details.
   - Currencies (code, name, symbol)
   - ISO alpha-2 / alpha-3 codes
   - Flag emoji and flag image URL
+- **Get Country Borders Tool**: List a country's land neighbors (capital, population, flag), or report that it has no land borders
   - `Other matches:` line when the search term matched more than one country
 
 - **Country Codes Resource**: Access a static JSON file with common country codes and names
@@ -188,6 +190,14 @@ The `get_country_info` tool fetches detailed information about any country by na
 - "Show me details for Japan and South Korea"
 
 The AI will automatically detect your request and use the `get_country_info` tool to fetch the information.
+
+### Using Tools - Get Country Borders
+
+The `get_country_borders` tool resolves the name to an ISO alpha-3 code, then fetches land neighbors from REST Countries v5 `/borders/{code}`. Only land borders count, so island nations (Japan, Iceland) report "no land borders". Example prompts:
+
+- "Which countries border Ukraine?"
+- "Give me the borders of the USA"
+- "What are Germany's neighbors?"
 
 ### Using Resources - Country Codes Reference
 
